@@ -1,17 +1,19 @@
 body {
   background-color: #3f72af;
+  font-size: 20px;
 }
 .content {
-  background-color: white;
-  width: 50vw;
+  background-color: #F9F7F7;
+  width: 40vw;
   height: max-content;
   margin: auto;
-  margin-top: 5%;
+  margin-top: 3%;
   border-radius: 20px;
-  padding-left: 40px;
-  padding-right: 40px;
-  padding-bottom: 40px;
-  padding-top: 10px;
+  padding: 20px 0;
+}
+.block-content {
+  width: 30vw;
+  margin: auto;
 }
 .title {
   font-weight: 400;
@@ -19,15 +21,17 @@ body {
   color: #112d4e;
   text-align: center;
 }
+
 .line1 {
   height: 1px;
   color: #00000080;
+  margin-bottom: 20px;
 }
 .item {
   display: flex;
   background-color: #dbe2ef;
-  margin-bottom: 10px;
-  border-radius: 4px;
+  margin-bottom: 30px;
+  border-radius: 5px;
 }
 .card {
   text-align: center;
@@ -38,18 +42,89 @@ body {
   align-items: center;
   justify-content: center;
   height: auto;
+  margin: 20px 0;
 }
+
 .input-item {
-    background-color: #DBE2EF;
-    border: 1px solid #B1B1B166;
-    border-top-left-radius: 2px;
-    border-bottom-left-radius: 2px;
+  background-color: #dbe2ef;
+  border: 1px solid #b1b1b166;
+  border-top-left-radius: 2px;
+  border-bottom-left-radius: 2px;
+  padding: 10px;
+  font-size: 16px;
+  height: 40px;
+  box-sizing: border-box; 
 }
-.add-button{
-    background-color: #AAAAAA;
-    border: 1px solid #B1B1B166;
-    border-top-right-radius: 2px;
-    border-bottom-right-radius: 2px;
-    color: white;
-    padding: auto;
+
+.add-button {
+  background-color: #aaaaaa;
+  border: 1px solid #b1b1b166;
+  border-top-right-radius: 2px;
+  border-bottom-right-radius: 2px;
+  color: white;
+  height: 40px;
+  width: 50px; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  cursor: pointer;
+}
+.remove-item {
+  font-size: 15px;
+  border: none;
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
+}
+:hover.remove-item {
+  background-color: #d3d2d2;
+  cursor: pointer;
+}
+.checkbox {
+  zoom: 1.5;
+}
+
+
+@media (max-width: 1280px) {
+  .content {
+    background-color: #F9F7F7;
+    width: 70vw;
+    height: max-content;
+    margin: auto;
+    margin-top: 3%;
+    border-radius: 20px;
+    padding: 20px 0;
+  }
+  .block-content {
+    width: 50vw;
+    margin: auto;
+  }
+  .title {
+    font-weight: 400;
+    font-size: 35px;
+    color: #112d4e;
+    text-align: center;
+  }
+}
+
+@media (max-width: 768px) {
+  .content {
+    background-color: #F9F7F7;
+    width: 90vw;
+    height: max-content;
+    margin: auto;
+    margin-top: 3%;
+    border-radius: 20px;
+    padding: 20px 0;
+  }
+  .block-content {
+    width: 70vw;
+    margin: auto;
+  }
+  .title {
+    font-weight: 400;
+    font-size: 30px;
+    color: #112d4e;
+    text-align: center;
+  }
 }

@@ -10,11 +10,13 @@ const renderItem = (items) => {
   var htmls = items.map((item) => {
     return `
           <div class='item' id="${item.id}">
-                <input type="checkbox" onchange="handleUpdateChecked(${
+                <input class="checkbox" type="checkbox" onchange="handleUpdateChecked(${
                   item.id
                 }, this.checked)" ${item.checked ? "checked" : ""}/>
                 <p class='card'>${item.content}</p>
-                <button onclick="handleDeleteItem(${item.id})">xóa</button>
+                <button class="remove-item" onclick="handleDeleteItem(${
+                  item.id
+                })">xóa</button>
             </div>
       `;
   });
@@ -28,11 +30,14 @@ const handleCreateItem = () => {
     const data = {
       method: "POST",
       headers: {
-        'Content-Type': 'application/json'
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({ content }),
     };
-    fetch(Api, data).then(() => getItem(renderItem));
+    fetch(Api, data).then(() => {
+      getItem(renderItem);
+      document.querySelector('input[name="content"]').value = "";
+    });
   };
 };
 
@@ -44,7 +49,7 @@ const handleUpdateChecked = (id, isChecked) => {
   fetch(`${Api}/${id}`, {
     method: "PUT",
     headers: {
-      'Content-Type': 'application/json'
+      "Content-Type": "application/json",
     },
     body: JSON.stringify({ checked: isChecked }),
   }).then(() => getItem(renderItem));
