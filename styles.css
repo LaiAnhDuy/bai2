@@ -29,9 +29,16 @@ body {
 }
 .item {
   display: flex;
-  background-color: #dbe2ef;
   margin-bottom: 30px;
-  border-radius: 5px;
+}
+.checkbox-content {
+  display: flex;
+  align-items: center;
+  padding-left: 20px;
+  width: 100%;
+  background-color: #dbe2ef;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
 }
 .card {
   text-align: center;
@@ -128,3 +135,36 @@ body {
     text-align: center;
   }
 }
+
+
+.checkbox {
+  appearance: none;
+  -webkit-appearance: none;
+  background-color: transparent;
+  border: 2px solid #7D7C7C;
+  width: 20px;
+  height: 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  position: relative;
+  display: inline-block;
+}
+
+
+.checkbox:checked {
+  background-color: transparent;
+  border: 2px solid #7D7C7C;
+}
+
+.checkbox:checked::after {
+  content: "";
+  position: absolute;
+  left: 5px;
+  top: 1px;
+  width: 4px;
+  height: 10px;
+  border: solid #36CF00;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+

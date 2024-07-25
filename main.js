@@ -10,14 +10,16 @@ const renderItem = (items) => {
   var htmls = items.map((item) => {
     return `
           <div class='item' id="${item.id}">
+            <div class='checkbox-content'>
                 <input class="checkbox" type="checkbox" onchange="handleUpdateChecked(${
                   item.id
                 }, this.checked)" ${item.checked ? "checked" : ""}/>
                 <p class='card'>${item.content}</p>
-                <button class="remove-item" onclick="handleDeleteItem(${
-                  item.id
-                })">xóa</button>
             </div>
+            <button class="remove-item" onclick="handleDeleteItem(${
+              item.id
+            })">xóa</button>
+          </div>
       `;
   });
   listItemBlock.innerHTML = htmls.join("");
