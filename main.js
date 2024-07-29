@@ -1,10 +1,34 @@
 var Api = "https://65d455c53f1ab8c63434e588.mockapi.io/job";
 
+const input = document.querySelector('input[name="content"]');
+const addItem = document.querySelector(".add-button");
+const checkboxs = document.querySelectorAll(".checkbox");
+const removeItem = document.querySelectorAll(".remove-item");
+
+const showLoading = () => {
+  document.getElementById("loading").style.display = "block";
+  input.disabled = true;
+  addItem.disabled = true;
+  checkboxs.forEach((checkbox) => (checkbox.disabled = true));
+  removeItem.forEach((item) => (item.disabled = true));
+};
+
+const hideLoading = () => {
+  document.getElementById("loading").style.display = "none";
+  input.disabled = false;
+  addItem.disabled = false;
+  checkboxs.forEach((checkbox) => (checkbox.disabled = false));
+  removeItem.forEach((item) => (item.disabled = false));
+};
+
 const getItem = (cb) => {
+  showLoading();
   fetch(Api)
     .then((res) => res.json())
-    .then(cb);
+    .then(cb)
+    .finally(hideLoading);
 };
+
 const renderItem = (items) => {
   var listItemBlock = document.querySelector(".list-item");
   var htmls = items.map((item) => {
@@ -28,7 +52,11 @@ const renderItem = (items) => {
 const handleCreateItem = () => {
   var createBtn = document.querySelector(".add-button");
   createBtn.onclick = () => {
-    var content = document.querySelector('input[name="content"]').value;
+    var content = document.querySelector('input[name="content"]').value.trim();
+    if (!content) {
+      alert("Content cannot be empty!");
+      return;
+    }
     const data = {
       method: "POST",
       headers: {
@@ -36,25 +64,34 @@ const handleCreateItem = () => {
       },
       body: JSON.stringify({ content }),
     };
-    fetch(Api, data).then(() => {
-      getItem(renderItem);
-      document.querySelector('input[name="content"]').value = "";
-    });
+    showLoading();
+    fetch(Api, data)
+      .then(() => {
+        getItem(renderItem);
+        document.querySelector('input[name="content"]').value = "";
+      })
+      .finally(hideLoading);
   };
 };
 
 const handleDeleteItem = (id) => {
-  fetch(`${Api}/${id}`, { method: "DELETE" }).then(() => getItem(renderItem));
+  showLoading();
+  fetch(`${Api}/${id}`, { method: "DELETE" })
+    .then(() => getItem(renderItem))
+    .finally(hideLoading);
 };
 
 const handleUpdateChecked = (id, isChecked) => {
+  showLoading();
   fetch(`${Api}/${id}`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({ checked: isChecked }),
-  }).then(() => getItem(renderItem));
+  })
+    .then(() => getItem(renderItem))
+    .finally(hideLoading);
 };
 
 getItem(renderItem);
